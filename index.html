@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pertemuan 6 DOM, Event Handling & Fetch API</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>Waroeng seadanya</h1>
+    <nav>
+      <a href="#produk">Data Produk</a>
+      <a href="#form">Form Interaktif</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="produk" class="card">
+      <h2>1. Data Produk </h2>
+
+      <div class="toolbar">
+        <label for="searchProduk">Cari produk</label>
+        <input type="search" id="searchProduk" placeholder="Ketik nama produk..." disabled>
+        <button type="button" id="btnReload">Muat Ulang</button>
+      </div>
+
+      <p id="productStatus" class="status" role="status" aria-live="polite"></p>
+      <div id="productList" class="product-grid"></div>
+    </section>
+
+    <section id="form" class="card">
+      <h2>2. Form Pendaftaran Workshop</h2>
+      <p class="hint">Isi form di bawah, validasi berjalan saat mengetik dan saat submit.</p>
+
+      <form id="registerForm" novalidate>
+        <div class="field">
+          <label for="nama">Nama Lengkap</label>
+          <input type="text" id="nama" name="nama" placeholder="Contoh: Budi Santoso">
+          <small class="error" id="namaError"></small>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="nama@email.com">
+          <small class="error" id="emailError"></small>
+        </div>
+
+        <div class="field">
+          <label for="umur">Umur</label>
+          <input type="number" id="umur" name="umur" placeholder="17 - 60">
+          <small class="error" id="umurError"></small>
+        </div>
+
+        <div class="field">
+          <label for="topik">Topik Workshop</label>
+          <select id="topik" name="topik">
+            <option value="">-- Pilih topik --</option>
+            <option value="JavaScript Dasar">JavaScript Dasar</option>
+            <option value="DOM & Event">DOM &amp; Event Handling</option>
+            <option value="Fetch API">Fetch API</option>
+          </select>
+          <small class="error" id="topikError"></small>
+        </div>
+
+        <fieldset class="field">
+          <legend>Level Pengalaman</legend>
+          <label class="inline"><input type="radio" name="level" value="Pemula" checked> Pemula</label>
+          <label class="inline"><input type="radio" name="level" value="Menengah"> Menengah</label>
+          <label class="inline"><input type="radio" name="level" value="Mahir"> Mahir</label>
+        </fieldset>
+
+        <div class="field">
+          <label for="alasan">Alasan Mengikuti</label>
+          <textarea id="alasan" name="alasan" rows="4" maxlength="200" placeholder="Minimal 10 karakter..."></textarea>
+          <div class="counter"><span id="charCount">0</span>/200 karakter</div>
+          <small class="error" id="alasanError"></small>
+        </div>
+
+        <div class="field">
+          <label class="inline">
+            <input type="checkbox" id="setuju" name="setuju"> Saya menyetujui syarat dan ketentuan
+          </label>
+          <small class="error" id="setujuError"></small>
+        </div>
+
+        <div class="actions">
+          <button type="submit" id="btnSubmit">Daftar</button>
+          <button type="button" id="btnReset" class="secondary">Reset</button>
+        </div>
+      </form>
+
+      <div id="formResult" class="result" hidden></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Tugas Individu Week 6 &mdash; Pemrograman Aplikasi Web</p>
+  </footer>
+
+  <script src="products.js"></script>
+  <script src="form.js"></script>
+</body>
+</html>
