@@ -1,6 +1,3 @@
-// ===================================================
-// Fitur 2: Form - DOM & Event Handling
-// ===================================================
 
 const form = document.getElementById("registerForm");
 const resultBox = document.getElementById("formResult");
@@ -8,7 +5,6 @@ const btnReset = document.getElementById("btnReset");
 const alasanInput = document.getElementById("alasan");
 const charCount = document.getElementById("charCount");
 
-// Aturan validasi per field. Mengembalikan pesan error, atau "" jika valid.
 const validators = {
   nama(value) {
     if (!value.trim()) return "Nama wajib diisi.";
@@ -38,7 +34,6 @@ const validators = {
   },
 };
 
-// Menampilkan / menghapus pesan error pada field
 function showError(fieldId, message) {
   const input = document.getElementById(fieldId);
   const errorEl = document.getElementById(fieldId + "Error");
@@ -47,7 +42,6 @@ function showError(fieldId, message) {
   input.classList.toggle("is-valid", message === "");
 }
 
-// Validasi satu field, mengembalikan true jika valid
 function validateField(fieldId) {
   const input = document.getElementById(fieldId);
   const message = validators[fieldId](input.value);
@@ -55,7 +49,6 @@ function validateField(fieldId) {
   return message === "";
 }
 
-// Validasi checkbox persetujuan
 function validateAgreement() {
   const checkbox = document.getElementById("setuju");
   const errorEl = document.getElementById("setujuError");
@@ -63,7 +56,6 @@ function validateAgreement() {
   return checkbox.checked;
 }
 
-// Menampilkan hasil pemrosesan form secara dinamis
 function showResult(data) {
   resultBox.innerHTML = "";
 
@@ -83,7 +75,7 @@ function showResult(data) {
     const dt = document.createElement("dt");
     dt.textContent = label;
     const dd = document.createElement("dd");
-    dd.textContent = value; // textContent mencegah injeksi HTML
+    dd.textContent = value;
     list.append(dt, dd);
   });
 
@@ -92,26 +84,23 @@ function showResult(data) {
   resultBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
-// ---------- Event Listeners ----------
 
-// Validasi realtime saat pengguna mengetik / memilih
 ["nama", "email", "umur", "alasan"].forEach((id) => {
   document.getElementById(id).addEventListener("input", () => validateField(id));
 });
 document.getElementById("topik").addEventListener("change", () => validateField("topik"));
 document.getElementById("setuju").addEventListener("change", validateAgreement);
 
-// Penghitung karakter
+
 alasanInput.addEventListener("input", () => {
   charCount.textContent = alasanInput.value.length;
 });
 
-// Submit form
+
 form.addEventListener("submit", (event) => {
-  event.preventDefault(); // cegah reload halaman
+  event.preventDefault();
 
   const fieldIds = ["nama", "email", "umur", "topik", "alasan"];
-  // map dulu agar semua field divalidasi (tidak berhenti di error pertama)
   const results = fieldIds.map(validateField);
   const agreed = validateAgreement();
 
@@ -132,7 +121,6 @@ form.addEventListener("submit", (event) => {
   });
 });
 
-// Reset form
 btnReset.addEventListener("click", () => {
   form.reset();
   charCount.textContent = "0";
